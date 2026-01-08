@@ -194,26 +194,6 @@
       font-size: 14px;
     }
 
-    /* 🚀 NUEVO: Contador de redirección */
-    .redirect-counter {
-      background: linear-gradient(135deg, #D4AF37, #bfa437);
-      color: #1a1a1a;
-      padding: 15px 25px;
-      border-radius: 15px;
-      margin: 20px 0;
-      text-align: center;
-      font-weight: bold;
-      font-size: 18px;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-      animation: pulse 1s infinite;
-    }
-
-    .countdown-number {
-      font-size: 24px;
-      color: #1a1a1a;
-      font-weight: 900;
-    }
-
     @media (max-width: 600px) {
       .whatsapp-button {
         font-size: 16px;
@@ -227,13 +207,6 @@
       .message {
         font-size: 14px;
       }
-      .redirect-counter {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
-      .countdown-number {
-        font-size: 20px;
-      }
     }
   </style>
 </head>
@@ -245,7 +218,7 @@
   <hr />
 
   <section class="verified">
-    <a href="https://wa.me/5492233125063" target="_blank" onclick="fbq('trackCustom', 'ClickWhatsApp')">
+    <a href="https://wa.me/5492235225487" target="_blank" onclick="fbq('trackCustom', 'ClickWhatsApp')">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" width="50" height="50" />
     </a>
     <h2>✅ <b>Plataforma Verificada</b> ✅</h2>
@@ -256,16 +229,10 @@
     Te estamos conectando con nuestro equipo vía WhatsApp.
   </div>
 
-  <!-- 🚀 NUEVO: Contador de redirección -->
-  <div class="redirect-counter" id="redirectCounter">
-    🚀 Redirigiendo a WhatsApp en <span class="countdown-number" id="countdown">2</span> segundos...
-  </div>
-
   <a class="whatsapp-button pulse" 
-     href="https://wa.me/5492233125063?text=Quiero%20mas%20Informacion!" 
+     href="https://wa.me/5492235225487?text=Quiero%20el%20bono%20del%20100%25" 
      target="_blank"
-     onclick="fbq('trackCustom', 'ClickWhatsApp')"
-     id="whatsappBtn">
+     onclick="fbq('trackCustom', 'ClickWhatsApp')">
     <i class="fab fa-whatsapp"></i> ¡QUIERO MI BONO!
   </a>
 
@@ -283,48 +250,7 @@
   </div>
 
   <script>
-    // 🚀 REDIRECCIÓN AUTOMÁTICA A WHATSAPP
-    let countdown = 2;
-    const countdownElement = document.getElementById('countdown');
-    const redirectCounter = document.getElementById('redirectCounter');
-    const whatsappBtn = document.getElementById('whatsappBtn');
-
-    // Función para actualizar el contador
-    function updateCountdown() {
-      countdownElement.textContent = countdown;
-      
-      if (countdown === 0) {
-        // Trackear evento en Facebook Pixel
-        if (typeof fbq !== 'undefined') {
-          fbq('trackCustom', 'AutoRedirectWhatsApp');
-        }
-        
-        // Redirigir a WhatsApp
-        window.open('https://wa.me/5492233125063?text=Quiero%20mas%20Informacion!', '_blank');
-        
-        // Actualizar el mensaje
-        redirectCounter.innerHTML = '✅ ¡Redirigido a WhatsApp! Si no se abrió automáticamente, haz clic en el botón.';
-        redirectCounter.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-        
-        return;
-      }
-      
-      countdown--;
-    }
-
-    // Iniciar contador inmediatamente
-    updateCountdown();
-    
-    // Actualizar cada segundo
-    const countdownInterval = setInterval(() => {
-      updateCountdown();
-      
-      if (countdown < 0) {
-        clearInterval(countdownInterval);
-      }
-    }, 1000);
-
-    // Efectos del botón WhatsApp (código original)
+    const whatsappBtn = document.querySelector('.whatsapp-button');
     if(whatsappBtn) {
       whatsappBtn.addEventListener('mouseenter', function() {
         this.style.transform = 'scale(1.05)';
@@ -333,24 +259,6 @@
         this.style.transform = 'scale(1)';
       });
     }
-
-    // 🚀 FUNCIONALIDAD ADICIONAL: Detectar si el usuario cambió de pestaña
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        // Usuario cambió de pestaña, probablemente fue a WhatsApp
-        if (typeof fbq !== 'undefined') {
-          fbq('trackCustom', 'UserSwitchedTab');
-        }
-      }
-    });
-
-    // 🚀 BACKUP: Si por alguna razón no funciona la redirección automática
-    setTimeout(() => {
-      if (countdown >= 0) {
-        console.log('Ejecutando redirección de backup...');
-        window.open('https://wa.me/5492233125063?text=Quiero%20mas%20Informacion!', '_blank');
-      }
-    }, 2500); // 2.5 segundos como backup
   </script>
 </body>
 </html>
